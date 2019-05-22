@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textHasilJson;
     private RequestQueue mQueue;
-    String url = "http://192.168.5.25/input1/input.php";
+    String url = "http://localhost/UASANDROID.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray jsonArray = response.getJSONArray("anggota");
+                    JSONArray jsonArray = response.getJSONArray("nama_anggota");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject mahasantri = jsonArray.getJSONObject(i);
 
-                        String id = mahasantri.getString("id_anggota");
-                        String nama = mahasantri.getString("nama_anggota");
+                        String id = mahasantri.getString("id");
+                        String nama = mahasantri.getString("nama");
                         String asalDaerah = mahasantri.getString("asal_daerah");
-                        String kamar = mahasantri.getString("kelompok_kamar");
-                        String saldo = mahasantri.getString("sisa_saldo");
+                        String kamar = mahasantri.getString("kamar");
 
 
-                        textHasilJson.append("Id anggota : "+ id + "\nnama anggota : "+ nama + "\nAsal Daerah : "+ asalDaerah + "\nKamar : "+ kamar+"\nsisa Saldo : "+saldo+"\n\n");
+
+                        textHasilJson.append("Id : "+ id + "\nnama : "+ nama + "\nAsal Daerah : "+ asalDaerah + "\nKamar : "+ kamar+"\n\n");
                     }
                 } catch (JSONException e){
                     e.printStackTrace();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error oyy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "anda gagal coba lagi", Toast.LENGTH_SHORT).show();
             }
         });
 
